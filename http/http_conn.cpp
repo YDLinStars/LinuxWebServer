@@ -22,12 +22,17 @@ const char *error_500_title = "Internal Error";
 const char *error_500_form = "There was an unusual problem serving the request file.\n";
 
 //当浏览器出现连接重置时，可能是网站根目录出错或http响应格式出错或者访问的文件中内容完全为空
-const char *doc_root = "/home/qgy/github/TinyWebServer/root";
+const char *doc_root = "/home/ydlin/Desktop/TinyWebServer-raw_version/root";
 
 //将表中的用户名和密码放入map
 map<string, string> users;
 locker m_lock;
 
+/**
+ * @description: 
+ * @param {connection_pool} *connPool
+ * @return {*}
+ */
 void http_conn::initmysql_result(connection_pool *connPool)
 {
     //先从连接池中取一个连接
@@ -290,7 +295,7 @@ http_conn::HTTP_CODE http_conn::parse_request_line(char *text)
         return BAD_REQUEST;
     //当url为/时，显示判断界面
     if (strlen(m_url) == 1)
-        strcat(m_url, "judge.html");
+        strcat(m_url, "/page/judge.html");
     m_check_state = CHECK_STATE_HEADER;
     return NO_REQUEST;
 }
@@ -453,28 +458,28 @@ http_conn::HTTP_CODE http_conn::do_request()
                 m_lock.unlock();
 
                 if (!res)
-                    strcpy(m_url, "/log.html");
+                    strcpy(m_url, "/page/login.html");
                 else
-                    strcpy(m_url, "/registerError.html");
+                    strcpy(m_url, "/page/registerError.html");
             }
             else
-                strcpy(m_url, "/registerError.html");
+                strcpy(m_url, "/page/registerError.html");
         }
         //如果是登录，直接判断
         //若浏览器端输入的用户名和密码在表中可以查找到，返回1，否则返回0
         else if (*(p + 1) == '2')
         {
             if (users.find(name) != users.end() && users[name] == password)
-                strcpy(m_url, "/welcome.html");
+                strcpy(m_url, "/page/welcome.html");
             else
-                strcpy(m_url, "/logError.html");
+                strcpy(m_url, "/page/loginError.html");
         }
     }
 
     if (*(p + 1) == '0')
     {
         char *m_url_real = (char *)malloc(sizeof(char) * 200);
-        strcpy(m_url_real, "/register.html");
+        strcpy(m_url_real, "/page/register.html");
         strncpy(m_real_file + len, m_url_real, strlen(m_url_real));
 
         free(m_url_real);
@@ -482,7 +487,7 @@ http_conn::HTTP_CODE http_conn::do_request()
     else if (*(p + 1) == '1')
     {
         char *m_url_real = (char *)malloc(sizeof(char) * 200);
-        strcpy(m_url_real, "/log.html");
+        strcpy(m_url_real, "/page/login.html");
         strncpy(m_real_file + len, m_url_real, strlen(m_url_real));
 
         free(m_url_real);
@@ -490,7 +495,7 @@ http_conn::HTTP_CODE http_conn::do_request()
     else if (*(p + 1) == '5')
     {
         char *m_url_real = (char *)malloc(sizeof(char) * 200);
-        strcpy(m_url_real, "/picture.html");
+        strcpy(m_url_real, "/page/picture.html");
         strncpy(m_real_file + len, m_url_real, strlen(m_url_real));
 
         free(m_url_real);
@@ -498,7 +503,7 @@ http_conn::HTTP_CODE http_conn::do_request()
     else if (*(p + 1) == '6')
     {
         char *m_url_real = (char *)malloc(sizeof(char) * 200);
-        strcpy(m_url_real, "/video.html");
+        strcpy(m_url_real, "/page/video.html");
         strncpy(m_real_file + len, m_url_real, strlen(m_url_real));
 
         free(m_url_real);
@@ -506,7 +511,7 @@ http_conn::HTTP_CODE http_conn::do_request()
     else if (*(p + 1) == '7')
     {
         char *m_url_real = (char *)malloc(sizeof(char) * 200);
-        strcpy(m_url_real, "/fans.html");
+        strcpy(m_url_real, "/page/fans.html");
         strncpy(m_real_file + len, m_url_real, strlen(m_url_real));
 
         free(m_url_real);

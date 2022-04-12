@@ -42,7 +42,7 @@ threadpool<T>::threadpool( connection_pool *connPool, int thread_number, int max
         throw std::exception();
     for (int i = 0; i < thread_number; ++i)
     {
-        //printf("create the %dth thread\n",i);
+        printf("create the %dth thread\n",i);
         if (pthread_create(m_threads + i, NULL, worker, this) != 0)
         {
             delete[] m_threads;

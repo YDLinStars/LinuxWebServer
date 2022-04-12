@@ -58,6 +58,15 @@ void addsig(int sig, void(handler)(int), bool restart = true)
     assert(sigaction(sig, &sa, NULL) != -1);
 }
 
+
+void show_error(int connfd, const char *info)
+{
+    printf("%s", info);
+    send(connfd, info, strlen(info), 0);
+    close(connfd);
+}
+
+
 //定时处理任务，重新定时以不断触发SIGALRM信号
 void timer_handler()
 {
@@ -76,12 +85,6 @@ void cb_func(client_data *user_data)
     Log::get_instance()->flush();
 }
 
-void show_error(int connfd, const char *info)
-{
-    printf("%s", info);
-    send(connfd, info, strlen(info), 0);
-    close(connfd);
-}
 
 int main(int argc, char *argv[])
 {
@@ -100,12 +103,12 @@ int main(int argc, char *argv[])
     }
 
     int port = atoi(argv[1]);
-
+    // 忽略SIGPIPE信号
     addsig(SIGPIPE, SIG_IGN);
 
     //创建数据库连接池
     connection_pool *connPool = connection_pool::GetInstance();
-    connPool->init("localhost", "root", "root", "qgydb", 3306, 8);
+    connPool->init("localhost", "root", "root", "webdb", 3306, 8);
 
     //创建线程池
     threadpool<http_conn> *pool = NULL;

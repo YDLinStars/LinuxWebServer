@@ -4,17 +4,20 @@
 #include <exception>
 #include <pthread.h>
 #include <semaphore.h>
-
+/* 封装信号量的类*/
 class sem
 {
 public:
+    // 创建并初始化信号量
     sem()
     {
         if (sem_init(&m_sem, 0, 0) != 0)
         {
+            // 如果构造函数没有返回值
             throw std::exception();
         }
     }
+    // 销毁信号量
     sem(int num)
     {
         if (sem_init(&m_sem, 0, num) != 0)
