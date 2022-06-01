@@ -43,6 +43,14 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
   * Ubuntu版本16.04
   * MySQL版本5.7.29
 
+  > sudo apt-get install mysql-server
+  >
+  > sudo apt-get install libmysqlclient-dev
+  >
+  > 否则报如下的错：
+  >
+  > **fatal error: mysql/mysql.h: No such file or directory**
+
 * 浏览器测试环境
 
   * Windows、Linux均可
@@ -52,12 +60,14 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
 
 * 测试前确认已安装MySQL数据库
 
+  > mysql -h localhost -u root
+
   ```C++
   // 建立yourdb库
-  create database yourdb;
+  create database webdb;
   
   // 创建user表
-  USE yourdb;
+  USE webdb;
   CREATE TABLE user(
       username char(50) NULL,
       passwd char(50) NULL
@@ -71,7 +81,7 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
 
   ```C++
   // root root修改为服务器数据库的登录名和密码
-  // qgydb修改为上述创建的yourdb库名
+  // yourdb修改为上述创建的yourdb库名
   connPool->init("localhost", "root", "root", "yourdb", 3306, 8);
   ```
 
@@ -79,7 +89,7 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
 
   ```C++
   // 修改为root文件夹所在路径
-  const char* doc_root="/home/qgy/TinyWebServer/root";
+  const char *doc_root = "/home/ydlin/Desktop/LinuxWebServer/root";
   ```
 
 # 3 使用
@@ -174,23 +184,79 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
 
 ## （3） 压力测试
 
+LT + LT，93251 QPS
 
+> - 并发连接总数：10500
+> - 访问服务器时间：5s
+> - 所有访问均成功
+
+压力测试的参数：
+
+```bash
+webbench -c 10500 -t 5 http://127.0.0.1 
+```
+
+客户端数量10500， 运行测试的时间。
 
 # 4 项目演示
 
+> 正在补充....
 
+## 项目界面展示
+
+### 欢迎界面
+
+![image-20220601233125805](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233125805.png)
+
+### 注册界面
+
+![image-20220601233159752](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233159752.png)
+
+登录界面
+
+![image-20220601233250141](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233250141.png)
+
+主界面
+
+![image-20220601233323555](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233323555.png)
+
+**查看大图片**
+
+做了一个轮播图
+
+
+
+**播放视频**
+
+![image-20220601233429685](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233429685.png)
 
 # 5 关键技术
 
-- ## 如何高效处理请求报文
+关键的技术实现主要有一下吴芬芬
 
-- ## 数据库连接池是如何运行的
+## （1）如何接收请求
 
-- ## 登录与注册是如何实现的
+https://ydlin.blog.csdn.net/article/details/125090338
 
-- ## 同步异步日志系统设计
+## （2）如何处理请求报文
 
-- ## 压力测试
+https://ydlin.blog.csdn.net/article/details/125090379
+
+## （3）如何响应请求
+
+https://ydlin.blog.csdn.net/article/details/125090441
+
+## （4）数据库连接池以及登录注册
+
+https://ydlin.blog.csdn.net/article/details/125090469
+
+## （5）同步异步日志系统设计
+
+https://ydlin.blog.csdn.net/article/details/125090506
+
+## （6）压力测试与服务器优化思考
+
+https://ydlin.blog.csdn.net/article/details/125090546
 
 # 6 学习资料
 

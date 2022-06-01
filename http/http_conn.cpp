@@ -22,14 +22,14 @@ const char *error_500_title = "Internal Error";
 const char *error_500_form = "There was an unusual problem serving the request file.\n";
 
 //当浏览器出现连接重置时，可能是网站根目录出错或http响应格式出错或者访问的文件中内容完全为空
-const char *doc_root = "/home/ydlin/Desktop/TinyWebServer-raw_version/root";
+const char *doc_root = "/home/ydlin/Desktop/LinuxWebServer/root";
 
 //将表中的用户名和密码放入map
 map<string, string> users;
 locker m_lock;
 
 /**
- * @description: 
+ * @description:
  * @param {connection_pool} *connPool
  * @return {*}
  */
@@ -143,15 +143,15 @@ void http_conn::init(int sockfd, const sockaddr_in &addr)
 {
     m_sockfd = sockfd;
     m_address = addr;
-    //int reuse=1;
-    //setsockopt(m_sockfd,SOL_SOCKET,SO_REUSEADDR,&reuse,sizeof(reuse));
+    // int reuse=1;
+    // setsockopt(m_sockfd,SOL_SOCKET,SO_REUSEADDR,&reuse,sizeof(reuse));
     addfd(m_epollfd, sockfd, true);
     m_user_count++;
     init();
 }
 
 //初始化新接受的连接
-//check_state默认为分析请求行状态
+// check_state默认为分析请求行状态
 void http_conn::init()
 {
     mysql = NULL;
@@ -335,7 +335,7 @@ http_conn::HTTP_CODE http_conn::parse_headers(char *text)
     }
     else
     {
-        //printf("oop!unknow header: %s\n",text);
+        // printf("oop!unknow header: %s\n",text);
         LOG_INFO("oop!unknow header: %s", text);
         Log::get_instance()->flush();
     }
@@ -348,7 +348,7 @@ http_conn::HTTP_CODE http_conn::parse_content(char *text)
     if (m_read_idx >= (m_content_length + m_checked_idx))
     {
         text[m_content_length] = '\0';
-        //POST请求中最后为输入的用户名和密码
+        // POST请求中最后为输入的用户名和密码
         m_string = text;
         return GET_REQUEST;
     }
@@ -407,7 +407,7 @@ http_conn::HTTP_CODE http_conn::do_request()
 {
     strcpy(m_real_file, doc_root);
     int len = strlen(doc_root);
-    //printf("m_url:%s\n", m_url);
+    // printf("m_url:%s\n", m_url);
     const char *p = strrchr(m_url, '/');
 
     //处理cgi
@@ -424,7 +424,7 @@ http_conn::HTTP_CODE http_conn::do_request()
         free(m_url_real);
 
         //将用户名和密码提取出来
-        //user=123&passwd=123
+        // user=123&passwd=123
         char name[100], password[100];
         int i;
         for (i = 5; m_string[i] != '&'; ++i)
