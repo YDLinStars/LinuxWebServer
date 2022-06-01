@@ -36,6 +36,10 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
 
 # 2 安装与配置
 
+## 开发环境
+
+VSCode
+
 ## 环境搭建
 
 * 服务器测试环境
@@ -184,19 +188,48 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
 
 ## （3） 压力测试
 
+压力测试的安装：
+
+> sudo apt-get install exuberant-ctags 
+>
+> cd webbench.1.5
+>
+> sudo  make && make install
+
+安装成功：
+
+> root@ubuntu:/home/ydlin/Desktop/LinuxWebServer/test_presure/webbench-1.5# make && make install
+> make: Nothing to be done for 'all'.
+> install -s webbench /usr/local/bin
+> install -m 644 webbench.1 /usr/local/man/man1
+> install -d /usr/local/share/doc/webbench
+> install -m 644 debian/copyright /usr/local/share/doc/webbench
+> install -m 644 debian/changelog /usr/local/share/doc/webbench
+> root@ubuntu:/home/ydlin/Desktop/LinuxWebServer/test_presure/webbench-1.5# which webbench
+
+压力测试的参数：
+
+```bash
+webbench -c 10500 -t 5 http://127.0.0.1:9906/
+```
+
+客户端数量10500， `t`运行测试的时间。
+
+Benchmarking: GET http://127.0.0.1:9906/
+10500 clients, running 5 sec.
+
+Speed=790884 pages/min, 1476294 bytes/sec.
+Requests: 65907 susceed, 0 failed.
+
+![image-20220602001514823](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220602001514823.png)
+
 LT + LT，93251 QPS
 
 > - 并发连接总数：10500
 > - 访问服务器时间：5s
 > - 所有访问均成功
 
-压力测试的参数：
 
-```bash
-webbench -c 10500 -t 5 http://127.0.0.1 
-```
-
-客户端数量10500， 运行测试的时间。
 
 # 4 项目演示
 
