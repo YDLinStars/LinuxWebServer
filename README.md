@@ -30,7 +30,9 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
 * 实现**同步/异步日志系统**，记录服务器运行状态
 * 经Webbench压力测试可以实现**上万的并发连接**数据交换
 
+![LinuxWebService.drawio](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/LinuxWebService.drawio.svg)
 
+主要有四大功能模块：半同步/半反应堆线程池，同步异步日志系统，定时器，请求逻辑处理
 
 # 2 安装与配置
 
