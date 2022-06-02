@@ -3,7 +3,17 @@ LinuxWebSever
 
 ![](https://img.shields.io/badge/build-passing-brightgreen) ![](https://img.shields.io/badge/ubuntu-16.04-blue) ![](https://img.shields.io/badge/MySQL-5.7.29-blue)  ![](https://img.shields.io/badge/cmake-3.21-blue)
 
+**开源地址**：https://github.com/YDLinStars/LinuxWebServer
 
+**技术栈**
+
+- `Ubuntu `操作系统常见命令
+- `MySQL`数据库的使用
+- `gcc`,`vim`,`makefile`指令
+- `多路IO复用(epoll)`知识
+- `线程同步机制`
+- `线程池`、`数据库连接池`
+- [`layui前端框架`] 可选 非必要
 
 # 1 概述
 
@@ -44,8 +54,8 @@ VSCode
 
 * 服务器测试环境
 
-  * Ubuntu版本16.04
-  * MySQL版本5.7.29
+  * `Ubuntu版本16.04`
+  * `MySQL版本5.7.29`
 
   > sudo apt-get install mysql-server
   >
@@ -233,33 +243,31 @@ LT + LT，93251 QPS
 
 # 4 项目演示
 
-> 正在补充....
-
 ## 项目界面展示
 
-### 欢迎界面
+### (1) 欢迎界面
 
 ![image-20220601233125805](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233125805.png)
 
-### 注册界面
+### (2) 注册界面
 
 ![image-20220601233159752](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233159752.png)
 
-登录界面
+### (3)登录界面
 
 ![image-20220601233250141](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233250141.png)
 
-主界面
+### (4)主界面
 
 ![image-20220601233323555](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233323555.png)
 
-**查看大图片**
+### (5)轮播图
 
 做了一个轮播图
 
 ![image-20220601235327449](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601235327449.png)
 
-**播放视频**
+### (6) **播放视频**
 
 ![image-20220601233429685](https://ydlin.oss-cn-guangzhou.aliyuncs.com/blog-img/image-20220601233429685.png)
 
